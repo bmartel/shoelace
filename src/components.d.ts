@@ -5,6 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { AnimationRegistry } from "./components/animations/animations-registry";
 import { IconLibraryMutator, IconLibraryResolver } from "./components/icon-library/icon-library-registry";
 export namespace Components {
     interface SlAlert {
@@ -110,6 +111,12 @@ export namespace Components {
           * Sets the current time of the animation in milliseconds.
          */
         "setCurrentTime": (time: number) => Promise<void>;
+    }
+    interface SlAnimations {
+        /**
+          * A set of animation keyframe object arrays bundled as an animation to be used by sl-animation
+         */
+        "registry": AnimationRegistry;
     }
     interface SlAvatar {
         /**
@@ -1356,6 +1363,12 @@ declare global {
         prototype: HTMLSlAnimationElement;
         new (): HTMLSlAnimationElement;
     };
+    interface HTMLSlAnimationsElement extends Components.SlAnimations, HTMLStencilElement {
+    }
+    var HTMLSlAnimationsElement: {
+        prototype: HTMLSlAnimationsElement;
+        new (): HTMLSlAnimationsElement;
+    };
     interface HTMLSlAvatarElement extends Components.SlAvatar, HTMLStencilElement {
     }
     var HTMLSlAvatarElement: {
@@ -1623,6 +1636,7 @@ declare global {
     interface HTMLElementTagNameMap {
         "sl-alert": HTMLSlAlertElement;
         "sl-animation": HTMLSlAnimationElement;
+        "sl-animations": HTMLSlAnimationsElement;
         "sl-avatar": HTMLSlAvatarElement;
         "sl-badge": HTMLSlBadgeElement;
         "sl-button": HTMLSlButtonElement;
@@ -1765,6 +1779,12 @@ declare namespace LocalJSX {
           * Sets the animation's playback rate. The default is `1`, which plays the animation at a normal speed. Setting this to `2`, for example, will double the animation's speed. A negative value can be used to reverse the animation. This value can be changed without causing the animation to restart.
          */
         "playbackRate"?: number;
+    }
+    interface SlAnimations {
+        /**
+          * A set of animation keyframe object arrays bundled as an animation to be used by sl-animation
+         */
+        "registry"?: AnimationRegistry;
     }
     interface SlAvatar {
         /**
@@ -3043,6 +3063,7 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "sl-alert": SlAlert;
         "sl-animation": SlAnimation;
+        "sl-animations": SlAnimations;
         "sl-avatar": SlAvatar;
         "sl-badge": SlBadge;
         "sl-button": SlButton;
@@ -3095,6 +3116,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "sl-alert": LocalJSX.SlAlert & JSXBase.HTMLAttributes<HTMLSlAlertElement>;
             "sl-animation": LocalJSX.SlAnimation & JSXBase.HTMLAttributes<HTMLSlAnimationElement>;
+            "sl-animations": LocalJSX.SlAnimations & JSXBase.HTMLAttributes<HTMLSlAnimationsElement>;
             "sl-avatar": LocalJSX.SlAvatar & JSXBase.HTMLAttributes<HTMLSlAvatarElement>;
             "sl-badge": LocalJSX.SlBadge & JSXBase.HTMLAttributes<HTMLSlBadgeElement>;
             "sl-button": LocalJSX.SlButton & JSXBase.HTMLAttributes<HTMLSlButtonElement>;

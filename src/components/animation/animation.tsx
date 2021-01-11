@@ -1,6 +1,5 @@
 import { Component, Element, Event, EventEmitter, Method, Prop, Watch, h } from '@stencil/core';
-import { animations } from './animations';
-import { easings } from './easings';
+import { registry as animations, easings } from '../animations/animations-registry';
 
 /**
  * @since 2.0

@@ -1,3 +1,7 @@
+export interface AnimationRegistry {
+  [name: string]: Keyframe[];
+}
+
 export const easings = {
   linear: 'linear',
   ease: 'ease',
@@ -29,3 +33,9 @@ export const easings = {
   easeOutBack: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
   easeInOutBack: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)'
 };
+
+export let registry: AnimationRegistry = {};
+
+export function registerAnimations(animations: AnimationRegistry) {
+  registry = animations;
+}
